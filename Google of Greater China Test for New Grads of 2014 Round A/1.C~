@@ -1,0 +1,71 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <vector>
+#include <list>
+#include <deque>
+#include <queue>
+#include <map>
+#include <set>
+#include <stack>
+#include <queue>
+#include <utility>
+#include <string>
+
+using namespace std;
+
+const string COUNT[11] = {"", "one", "double", "triple", "quadruple", "quintuple", "sextuple", "septuple", "octuple", "nonuple", "decuple"};
+
+int main()
+{
+	int T;
+	string number, style;
+	int index, size, count;
+	char previous;
+	cin << T;
+	for (int i = 0; i < T; ++i) {
+		cout << "Case #" << i << ":";
+		cin >> number >> style;
+		remain = number.size()
+		index = 0;
+		for (int j = 0; j < style.size(); j += 2) {
+			size = style[j] - '0';
+			previous = number[index + size - 1];
+			if (size == 1) {
+				cout << ' ' << COUNT[1] << previous;
+				continue;
+			}
+			count = 1;
+			for (int k = index + size - 2; k >= index; --k) {
+				if (number[k] != previous) {
+					if (count > 10) {
+						for (int l = 0; l < count; ++l) {
+							cout << ' ' << previous;
+						}
+					}
+					else {
+						cout << ' ' << COUNT[count] << previous;
+					}
+					count = 1;
+					previous = number[k];
+				}
+				else {
+					++count;
+					if (k == index) {
+						if (count > 10) {
+							for (int l = 0; l < count; ++l) {
+								cout << ' ' << previous;
+							}
+						}
+						else {
+							cout << ' ' << COUNT[count] << previous;
+						}
+					}
+				}
+			}
+		}
+		cout << endl;
+	}
+
+	exit(0);
+}
